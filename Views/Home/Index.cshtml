@@ -1,0 +1,32 @@
+@model List<QuizQuestion>
+@{
+    ViewData["Title"] = "Assignment Answers";
+    var letters = new[] { "A", "B", "C", "D" };
+}
+<section class="hero">
+    <p class="eyebrow">IT ELECTIVE 2</p>
+    <h1>ASP.NET Core MVC & Web API</h1>
+    <p class="intro">Multiple-choice questions with the correct answers and short explanations.</p>
+    <div class="summary"><strong>@Model.Count Questions</strong><span>Answer key and explanations</span></div>
+</section>
+<div class="question-list">
+@foreach (var item in Model)
+{
+    <article class="question-card">
+        <div class="question-heading"><span class="number">@item.Number</span><h2>@item.Question</h2></div>
+        <div class="choices">
+        @for (var i = 0; i < item.Choices.Count; i++)
+        {
+            var letter = letters[i];
+            var isCorrect = letter == item.CorrectAnswer;
+            <div class="choice @(isCorrect ? "correct" : "")">
+                <span class="choice-letter">@letter</span><span>@item.Choices[i]</span>
+                @if (isCorrect) { <span class="check">Correct answer</span> }
+            </div>
+        }
+        </div>
+        <div class="explanation"><strong>Answer: @item.CorrectAnswer</strong><p>@item.Explanation</p></div>
+    </article>
+}
+</div>
+<div class="note"><strong>Note:</strong> Question 9 in the message was incomplete. The app includes the likely answer, <code>ActionResult&lt;T&gt;</code>, and sample choices so the page is complete.</div>

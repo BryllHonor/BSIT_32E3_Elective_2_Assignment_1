@@ -1,0 +1,25 @@
+using Microsoft.AspNetCore.Mvc;
+using BSIT_32E3_Elective_2_Assignment_1.Models;
+
+namespace BSIT_32E3_Elective_2_Assignment_1.Controllers;
+
+public class HomeController : Controller
+{
+    public IActionResult Index()
+    {
+        var questions = new List<QuizQuestion>
+        {
+            new() { Number = 1, Question = "What is the fundamental difference between Server-Side Rendering (SSR/MVC) and a Decoupled Web API architecture?", Choices = new() { "A) SSR returns JSON payloads, whereas a Web API compiles .cshtml Razor views on the server.", "B) SSR compiles HTML views on the server and sends fully rendered markup to the browser, whereas a Web API acts as a stateless data provider returning raw JSON.", "C) SSR only works with mobile applications, whereas Web APIs are restricted to desktop web browsers.", "D) SSR requires client-side routing in React, whereas Web APIs manage HTML layouts directly on the server." }, CorrectAnswer = "B", Explanation = "MVC renders Razor views into HTML on the server. A decoupled Web API normally returns data, commonly as JSON, for a client to use." },
+            new() { Number = 2, Question = "Why do Web API controllers in ASP.NET Core inherit from ControllerBase instead of Controller?", Choices = new() { "A) ControllerBase supports Razor View rendering using View() and ViewData.", "B) ControllerBase provides essential HTTP handling and routing without carrying unnecessary HTML view rendering overhead.", "C) Controller is obsolete in .NET 8 and cannot handle HTTP POST requests.", "D) ControllerBase automatically creates SQLite database files on application startup." }, CorrectAnswer = "B", Explanation = "ControllerBase provides API-focused features such as HTTP results and model binding. Controller adds view-rendering support." },
+            new() { Number = 3, Question = "Which framework attribute automatically triggers an HTTP 400 Bad Request response when incoming request payloads fail structural model validation?", Choices = new() { "A) [Route]", "B) [HttpGet]", "C) [ApiController]", "D) [FromQuery]" }, CorrectAnswer = "C", Explanation = "The [ApiController] attribute enables automatic model-state validation responses for invalid request data." },
+            new() { Number = 4, Question = "Which HTTP status code should an API return after successfully creating a new resource via a POST request, along with a Location header pointing to the new URI?", Choices = new() { "A) 200 OK", "B) 201 Created", "C) 204 No Content", "D) 404 Not Found" }, CorrectAnswer = "B", Explanation = "201 Created indicates that the resource was successfully created. The Location header can identify its new URI." },
+            new() { Number = 5, Question = "When a DELETE request successfully removes a resource from the server and returns no content in the response body, which HTTP status code is standard?", Choices = new() { "A) 200 OK", "B) 201 Created", "C) 204 No Content", "D) 400 Bad Request" }, CorrectAnswer = "C", Explanation = "204 No Content indicates success when there is no response body to return." },
+            new() { Number = 6, Question = "Which endpoint URI follows RESTful resource-oriented naming best practices?", Choices = new() { "A) GET /api/getAllCourses", "B) GET /api/courses", "C) POST /api/createNewCourseRecord", "D) POST /api/deleteCourseById?id=5" }, CorrectAnswer = "B", Explanation = "REST endpoints generally use nouns to identify resources. The HTTP verb describes the action." },
+            new() { Number = 7, Question = "What is the primary function of the [Route(\"api/[controller]\")] attribute in ASP.NET Core?", Choices = new() { "A) It connects the controller directly to an Entity Framework database context.", "B) It maps incoming URI request paths to the controller class using the class name token.", "C) It encrypts all incoming JSON payloads.", "D) It enables Cross-Origin Resource Sharing (CORS) for external React apps." }, CorrectAnswer = "B", Explanation = "The [controller] token is replaced by the controller name, usually without the Controller suffix." },
+            new() { Number = 8, Question = "Which HTTP verb is safe and idempotent, intended exclusively for retrieving resource data without altering server state?", Choices = new() { "A) POST", "B) PUT", "C) GET", "D) DELETE" }, CorrectAnswer = "C", Explanation = "GET is intended to retrieve a representation and should not change server state. It is safe and idempotent." },
+            new() { Number = 9, Question = "In ASP.NET Core Web API, what wrapper type allows action methods to return either a strongly typed domain object or standard HTTP status result helpers (such as Ok(), NotFound())?", Choices = new() { "A) Task", "B) ActionResult<T>", "C) ViewResult", "D) JsonDocument" }, CorrectAnswer = "B", Explanation = "ActionResult<T> combines a strongly typed response body with MVC action results such as Ok() and NotFound(). The supplied question was cut off after option A, so these choices complete it for the app." }
+        };
+
+        return View(questions);
+    }
+}
